@@ -4,20 +4,22 @@
 #loading the packages
 library(labdsv)
 
+dataset_root = '/home/ashiskb/Documents/data/NPDS-data/'
+
 #import the data from csv files: {data file, group file}
 #Import the first csv file 'df_npds_data.csv' containing both samples (rows) with features(columns)
 #First column in the file is called 'product'. That's not part of the features (i.e., species)
 #where: 
 #product: str, class names
 #Make sure, no feature column is all zeros, i.e., each feature needs to be present (=True/1) at least one of the sample
-npds_data <- read.csv('indval-workspace/df_npds_data.csv',sep=',')#,row.names=1) #main csv file
+npds_data <- read.csv(paste(dataset_root,'indval-workspace/df_npds_data.csv',sep=''),sep=',')#,row.names=1) #main csv file
 
 
 #Import the second csv file 'df_npds_groups.csv' containing class name to integer mapping
 # because indval can not handle categorical/non-numeric values as the 2nd argument to indval()
 #Make sure, it has the same number of rows as the first csv file
 #And, it maps categorical class names to integers
-npds_groups <- read.csv('indval-workspace/df_npds_groups.csv',sep=',')
+npds_groups <- read.csv(paste(dataset_root,'indval-workspace/df_npds_groups.csv',sep=''),sep=',')
 
 
 
@@ -48,4 +50,4 @@ indvalsummary_sorted_by_indval_desc <- indvalsummary[order(-indvalsummary$indval
 
 
 ##Export result to a csv file
-write.csv(indvalsummary_sorted_by_indval_desc, 'indval-workspace/indvalsummary-npds-on-131-features.csv')
+write.csv(indvalsummary_sorted_by_indval_desc, paste(dataset_root,'indval-workspace/indvalsummary-npds-on-131-features.csv',sep=''))
